@@ -448,12 +448,12 @@
   var categories = [strategyCategory, craftCategory, writingCraftCategory, collabCategory, impactCategory];
   function Widget() {
     const voteMap = useSyncedMap("skill-level");
+    const voteFutureMap = useSyncedMap("skill-future-level");
     const [userLevel, setUserLevel] = useSyncedState("level", 1);
     const [showLevels, setShowLevels] = useSyncedState("isShown", false);
     const [Status, setStatus] = useSyncedState("status", "2023");
     const statusOptions = [{ option: "2023", label: "2023" }, { option: "2024", label: "2024" }];
     const currentYear = Status == "2023";
-    console.log(currentYear);
     usePropertyMenu([
       {
         itemType: "dropdown",
@@ -706,7 +706,7 @@
       spacing: 30
     }, categories.map((category) => {
       return category.skills.map((skill, i) => {
-        return Skill(skill, category.name, category.color, category.skillDescriptions[i], `${category.name}-${skill}`, Status, showLevels, voteMap);
+        return Skill(skill, category.name, category.color, category.skillDescriptions[i], `${category.name}-${skill}`, Status, showLevels, voteMap, voteFutureMap);
       });
     })), /* @__PURE__ */ figma.widget.h(AutoLayout, {
       name: "Categories",
@@ -733,9 +733,10 @@
       fontWeight: 700
     }, name);
   }
-  function Skill(name, category, color, skill_description, skill_key, status, showLevels, voteMap) {
+  function Skill(name, category, color, skill_description, skill_key, status, showLevels, voteMap, voteFutureMap) {
     const offsetA = 734 - (voteMap.get(skill_key) || 1) * 130;
-    const activeOpacity = 0.8;
+    const offsetB = 734 - (voteFutureMap.get(skill_key) || 1) * 130;
+    const activeOpacity = 0.9;
     const hoverOpacity = 0.4;
     return /* @__PURE__ */ figma.widget.h(Frame, {
       name: `Skill-${name}`,
@@ -745,7 +746,7 @@
     }, /* @__PURE__ */ figma.widget.h(Rectangle, {
       name: `Skill-Block-Bg-${name}`,
       key: `Skill-Block-Bg-${skill_key}`,
-      opacity: 0.2,
+      opacity: 0.1,
       y: {
         type: "bottom",
         offset: 1
@@ -757,7 +758,7 @@
     }), /* @__PURE__ */ figma.widget.h(Rectangle, {
       name: `Skill-Block-5-${name}`,
       key: `Skill-Block-5-${skill_key}`,
-      opacity: voteMap.get(skill_key) == "5" ? activeOpacity : 0,
+      opacity: voteFutureMap.get(skill_key) == "5" ? 0.3 : voteMap.get(skill_key) == "5" ? activeOpacity : 0,
       y: {
         type: "bottom",
         offset: 1
@@ -767,7 +768,9 @@
       width: 250,
       height: 650,
       onClick: () => {
-        voteMap.set(skill_key, 5);
+        status == "2023" ? voteMap.set(skill_key, 5) : voteFutureMap.set(skill_key, 5);
+        console.log("2023 " + voteMap.get(skill_key));
+        console.log("2024 " + voteFutureMap.get(skill_key));
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "5" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -776,7 +779,7 @@
     }), /* @__PURE__ */ figma.widget.h(Rectangle, {
       name: `Skill-Block-4-${name}`,
       key: `Skill-Block-4-${skill_key}`,
-      opacity: voteMap.get(skill_key) == "4" ? activeOpacity : 0,
+      opacity: voteFutureMap.get(skill_key) == "4" ? 0.3 : voteMap.get(skill_key) == "4" ? activeOpacity : 0,
       y: {
         type: "bottom",
         offset: 1
@@ -786,7 +789,9 @@
       width: 250,
       height: 519,
       onClick: () => {
-        voteMap.set(skill_key, 4);
+        status == "2023" ? voteMap.set(skill_key, 4) : voteFutureMap.set(skill_key, 4);
+        console.log("2023 " + voteMap.get(skill_key));
+        console.log("2024 " + voteFutureMap.get(skill_key));
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "4" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -795,7 +800,7 @@
     }), /* @__PURE__ */ figma.widget.h(Rectangle, {
       name: `Skill-Block-3-${name}`,
       key: `Skill-Block-3-${skill_key}`,
-      opacity: voteMap.get(skill_key) == "3" ? activeOpacity : 0,
+      opacity: voteFutureMap.get(skill_key) == "3" ? 0.3 : voteMap.get(skill_key) == "3" ? activeOpacity : 0,
       y: {
         type: "bottom",
         offset: 1
@@ -805,7 +810,9 @@
       width: 250,
       height: 389,
       onClick: () => {
-        voteMap.set(skill_key, 3);
+        status == "2023" ? voteMap.set(skill_key, 3) : voteFutureMap.set(skill_key, 3);
+        console.log("2023 " + voteMap.get(skill_key));
+        console.log("2024 " + voteFutureMap.get(skill_key));
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "3" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -814,7 +821,7 @@
     }), /* @__PURE__ */ figma.widget.h(Rectangle, {
       name: `Skill-Block-2-${name}`,
       key: `Skill-Block-2-${skill_key}`,
-      opacity: voteMap.get(skill_key) == "2" ? activeOpacity : 0,
+      opacity: voteFutureMap.get(skill_key) == "2" ? 0.3 : voteMap.get(skill_key) == "2" ? activeOpacity : 0,
       y: {
         type: "bottom",
         offset: 1
@@ -824,7 +831,9 @@
       width: 250,
       height: 259,
       onClick: () => {
-        voteMap.set(skill_key, 2);
+        status == "2023" ? voteMap.set(skill_key, 2) : voteFutureMap.set(skill_key, 2);
+        console.log("2023 " + voteMap.get(skill_key));
+        console.log("2024 " + voteFutureMap.get(skill_key));
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "2" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -833,7 +842,7 @@
     }), /* @__PURE__ */ figma.widget.h(Rectangle, {
       name: `Skill-Block-1-${name}`,
       key: `Skill-Block-1-${skill_key}`,
-      opacity: voteMap.get(skill_key) == "1" ? activeOpacity : 0,
+      opacity: voteFutureMap.get(skill_key) == "1" ? 0.3 : voteMap.get(skill_key) == "1" ? activeOpacity : 0,
       y: {
         type: "bottom",
         offset: 0
@@ -843,7 +852,9 @@
       width: 250,
       height: 130,
       onClick: () => {
-        voteMap.set(skill_key, 1);
+        status == "2023" ? voteMap.set(skill_key, 1) : voteFutureMap.set(skill_key, 1);
+        console.log("2023 " + voteMap.get(skill_key));
+        console.log("2024 " + voteFutureMap.get(skill_key));
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "1" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -856,7 +867,7 @@
       opacity: voteMap.get(skill_key) ? 0.9 : 0,
       y: {
         type: "top",
-        offset: offsetA
+        offset: status == "2023" ? offsetA : offsetB
       },
       fill: name == "Content" || name == "Copywriting" || name == "Design" || name == "Systems\u200B" ? "#665200" : "#FFF",
       width: 250,
@@ -867,7 +878,7 @@
       fontSize: 24,
       letterSpacing: -0.456,
       fontWeight: 700
-    }, "L", voteMap.get(skill_key) || 1), /* @__PURE__ */ figma.widget.h(Text, {
+    }, status == "2023" ? voteMap.get(skill_key) : voteFutureMap.get(skill_key) || "Not Chosen Yet"), /* @__PURE__ */ figma.widget.h(Text, {
       name: `Skill-Label-${name}`,
       key: `Skill-Label-${skill_key}`,
       fill: color,

@@ -54,12 +54,13 @@ const categories = [strategyCategory, craftCategory, writingCraftCategory, colla
 
 function Widget() {
   const voteMap = useSyncedMap<number>("skill-level")
+  const voteFutureMap = useSyncedMap<number>("skill-future-level")
   const [userLevel, setUserLevel] = useSyncedState<number>('level', 1)
   const [showLevels, setShowLevels] = useSyncedState<boolean>("isShown", false)
   const [Status, setStatus] = useSyncedState<string>("status", "2023")
   const statusOptions = [{option: "2023", label: "2023"}, {option: "2024", label: "2024"}]
   const currentYear = (Status == "2023")
-  console.log(currentYear);
+  //console.log(currentYear);
 
   usePropertyMenu(
     [
@@ -377,7 +378,8 @@ function Widget() {
             `${category.name}-${skill}`,
             Status,
             showLevels,
-            voteMap
+            voteMap, 
+            voteFutureMap
           );
         });
       })}
@@ -442,12 +444,16 @@ function Skill(
   skill_key: string, // "Strategy-Product",
   status: string,
   showLevels: boolean,
-  voteMap: SyncedMap
+  voteMap: SyncedMap,
+  voteFutureMap: SyncedMap
 ) {
   const offsetA = 734 - ((voteMap.get(skill_key) || 1) * 130)
-  const activeOpacity = 0.8
+  const offsetB = 734 - ((voteFutureMap.get(skill_key) || 1) * 130)
+
+  const activeOpacity = 0.9
   const hoverOpacity = 0.4
   //const hideSkill = (status == "2023") || (status == "2024")
+
   return (
     <Frame
       name={ `Skill-${name}` }
@@ -459,7 +465,7 @@ function Skill(
       <Rectangle
         name= { `Skill-Block-Bg-${name}` }
         key= { `Skill-Block-Bg-${skill_key}` }
-        opacity={0.2}
+        opacity={0.1}
         y={{
           type: "bottom",
           offset: 1,
@@ -472,7 +478,11 @@ function Skill(
       <Rectangle
         name= { `Skill-Block-5-${name}` }
         key= { `Skill-Block-5-${skill_key}` }
-        opacity= { voteMap.get(skill_key) == "5" ? activeOpacity : 0 }
+        //opacity= { voteMap.get(skill_key) == "5" ? activeOpacity : 0 }
+        //let c= (a == b ? 'a is equal to b' : (a >b) ? 'a is greater than b' : 'b is greater than a');
+
+        opacity= { voteFutureMap.get(skill_key) == "5" ? 0.3 : voteMap.get(skill_key) == "5" ? activeOpacity : 0}
+
         y={{
           type: "bottom",
           offset: 1,
@@ -483,7 +493,11 @@ function Skill(
         height={650}
         onClick={() => {
           // console.log(`Setting ${skill_key} to 5`);
-          voteMap.set(skill_key, 5);
+          
+          status == "2023" ? voteMap.set(skill_key, 5) : voteFutureMap.set(skill_key, 5);
+          console.log("2023 " + voteMap.get(skill_key));
+          console.log("2024 " + voteFutureMap.get(skill_key));
+
         }}
         hoverStyle={{ opacity: voteMap.get(skill_key) == "5" ? 1 : hoverOpacity }}
         tooltip={
@@ -495,7 +509,9 @@ function Skill(
       <Rectangle
         name= { `Skill-Block-4-${name}` }
         key = { `Skill-Block-4-${skill_key}` }
-        opacity= { voteMap.get(skill_key) == "4" ? activeOpacity : 0 }
+        //opacity= { voteMap.get(skill_key) == "4" ? activeOpacity : 0 }
+        
+        opacity= { voteFutureMap.get(skill_key) == "4" ? 0.3 : voteMap.get(skill_key) == "4" ? activeOpacity : 0}
         y={{
           type: "bottom",
           offset: 1,
@@ -506,7 +522,9 @@ function Skill(
         height={519}
         onClick={() => {
           //console.log(`Setting ${skill_key} to 4`);
-          voteMap.set(skill_key, 4);
+          status == "2023" ? voteMap.set(skill_key, 4) : voteFutureMap.set(skill_key, 4);
+          console.log("2023 " + voteMap.get(skill_key));
+          console.log("2024 " + voteFutureMap.get(skill_key));          
         }}
         hoverStyle={{ opacity: voteMap.get(skill_key) == "4" ? 1 : hoverOpacity }}
         tooltip={
@@ -518,7 +536,9 @@ function Skill(
       <Rectangle
         name= { `Skill-Block-3-${name}` }
         key = { `Skill-Block-3-${skill_key}` }
-        opacity= { voteMap.get(skill_key) == "3" ? activeOpacity : 0 }
+        //opacity= { voteMap.get(skill_key) == "3" ? activeOpacity : 0 }
+        opacity= { voteFutureMap.get(skill_key) == "3" ? 0.3 : voteMap.get(skill_key) == "3" ? activeOpacity : 0}
+
         y={{
           type: "bottom",
           offset: 1,
@@ -529,7 +549,9 @@ function Skill(
         height={389}
         onClick={() => {
           // console.log(`Setting ${skill_key} to 3`);
-          voteMap.set(skill_key, 3);
+          status == "2023" ? voteMap.set(skill_key, 3) : voteFutureMap.set(skill_key, 3);
+          console.log("2023 " + voteMap.get(skill_key));
+          console.log("2024 " + voteFutureMap.get(skill_key));
         }}
         hoverStyle={{ opacity: voteMap.get(skill_key) == "3" ? 1 : hoverOpacity }}
         tooltip={
@@ -541,7 +563,9 @@ function Skill(
       <Rectangle
         name= { `Skill-Block-2-${name}` }
         key = { `Skill-Block-2-${skill_key}` }
-        opacity= { voteMap.get(skill_key) == "2" ? activeOpacity : 0 }
+        //opacity= { voteMap.get(skill_key) == "2" ? activeOpacity : 0 }
+        opacity= { voteFutureMap.get(skill_key) == "2" ? 0.3 : voteMap.get(skill_key) == "2" ? activeOpacity : 0}
+
         y={{
           type: "bottom",
           offset: 1,
@@ -552,7 +576,9 @@ function Skill(
         height={259}
         onClick={() => {
           // console.log(`Setting ${skill_key} to 2`);
-          voteMap.set(skill_key, 2);
+          status == "2023" ? voteMap.set(skill_key, 2) : voteFutureMap.set(skill_key, 2);
+          console.log("2023 " + voteMap.get(skill_key));
+          console.log("2024 " + voteFutureMap.get(skill_key));
         }}
         hoverStyle={{ opacity: voteMap.get(skill_key) == "2" ? 1 : hoverOpacity }}
         tooltip={
@@ -564,7 +590,9 @@ function Skill(
       <Rectangle
         name= { `Skill-Block-1-${name}` }
         key = { `Skill-Block-1-${skill_key}` }
-        opacity= { voteMap.get(skill_key) == "1" ? activeOpacity : 0 }
+        //opacity= { voteMap.get(skill_key) == "1" ? activeOpacity : 0 }
+        opacity= { voteFutureMap.get(skill_key) == "1" ? 0.3 : voteMap.get(skill_key) == "1" ? activeOpacity : 0}
+
         y={{
           type: "bottom",
           offset: 0,
@@ -575,7 +603,9 @@ function Skill(
         height={130}
         onClick={() => {
           // console.log(`Setting ${skill_key} to 1`);
-          voteMap.set(skill_key, 1);
+          status == "2023" ? voteMap.set(skill_key, 1) : voteFutureMap.set(skill_key, 1);
+          console.log("2023 " + voteMap.get(skill_key));
+          console.log("2024 " + voteFutureMap.get(skill_key));
         }}
         hoverStyle={{ opacity: voteMap.get(skill_key) == "1" ? 1 : hoverOpacity }}
         tooltip={
@@ -591,7 +621,8 @@ function Skill(
         opacity={ voteMap.get(skill_key)? 0.9 : 0 }
         y={{
           type: "top",
-          offset: offsetA,
+          //offset: offsetA,
+          offset: ( status == "2023" ? (offsetA) : (offsetB) )
         }}
         fill= { (name == "Content" || name == "Copywriting" || name == "Design" || name == "Systems\u200B" ) ? "#665200" : "#FFF" }
         width={250}
@@ -603,7 +634,8 @@ function Skill(
         letterSpacing={-0.456}
         fontWeight={700}
       >
-        L{(voteMap.get(skill_key) || 1)}
+        {status == "2023" ? (voteMap.get(skill_key)) : ((voteFutureMap.get(skill_key)) || "Not Chosen Yet") }
+
       </Text>
       <Text
         name= { `Skill-Label-${name}` }
