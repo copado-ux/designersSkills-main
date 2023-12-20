@@ -5,7 +5,7 @@
   "main": "code.js",
   "scripts": {
     "build": "esbuild code.tsx --bundle --outfile=code.js"
-    },
+  },
   "author": "",
   "license": "",
   "devDependencies": {
