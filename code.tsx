@@ -494,7 +494,7 @@ function Skill(
         onClick={() => {
           // console.log(`Setting ${skill_key} to 5`);
           
-          status == "2023" ? voteMap.set(skill_key, 5) : voteFutureMap.set(skill_key, 5);
+          status == "2023" ? voteMap.set(skill_key, 5) : (voteFutureMap.set(skill_key, 5));
           console.log("2023 " + voteMap.get(skill_key));
           console.log("2024 " + voteFutureMap.get(skill_key));
 
@@ -634,7 +634,7 @@ function Skill(
         letterSpacing={-0.456}
         fontWeight={700}
       >
-        {status == "2023" ? (voteMap.get(skill_key)) : ((voteFutureMap.get(skill_key)) || "Not Chosen Yet") }
+        {status == "2023" ? (voteMap.get(skill_key)) : ((voteFutureMap.get(skill_key) || "Not Chosen Yet")) }
 
       </Text>
       <Text
