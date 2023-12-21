@@ -94,8 +94,9 @@ function Widget() {
       }
     },
   )
-  return (
-    <Frame
+  return (   
+
+     <Frame
       name="Everything"
       width= { Status == "Future" ? 6000 : 6000 }
       height={1100}
@@ -147,33 +148,49 @@ function Widget() {
             false,
         },
       ]}
-      stroke="#00000026"
+      stroke="#DBDBDB"
       strokeWidth={3}
       
     >     
-     <Text
-    name={ Status}
-    key={ Status }
-    //hidden = { hideCategory ? true : false }
-    fill= {"#A7A7A7"}
-    x={82}
-    y={50}
-    width={ 240 }
-    height={50}
-    verticalAlignText="center"
-    horizontalAlignText="left"
-    lineHeight="150%"
-    fontFamily="Inter"
-    fontSize={40}
-    letterSpacing={1.536}
-    textCase="upper"
-    fontWeight={700}
-    >
-    {Status} 
-    </Text>
+
+    <AutoLayout
+      name='leftPanel'
+      x={0}
+      y={0}
+      width={1000}
+      height={1100}
+      stroke="#DBDBDB"
+      strokeWidth={3}
+      spacing={32}
+      padding={64}
+      direction='vertical'
+
+      >
+          <Text
+          name={ Status}
+          key={ Status }
+          //hidden = { hideCategory ? true : false }
+          fill= {"#A7A7A7"}
+          x={82}
+          y={50}
+          width={ 240 }
+          height={50}
+          verticalAlignText="center"
+          horizontalAlignText="left"
+          lineHeight="150%"
+          fontFamily="Inter"
+          fontSize={40}
+          letterSpacing={1.536}
+          textCase="upper"
+          fontWeight={700}
+          >
+          {Status} 
+          </Text>
+      </AutoLayout>
+ 
       <Frame
         name="Dividers"
-        x={82}
+        x={1200}
         y={228}
         width={Status == "Future" ? 6000 : 6000 }
         height={650}
@@ -383,7 +400,7 @@ function Widget() {
     <AutoLayout
       name="Container"
       verticalAlignItems={"center"}
-      x={150}
+      x={1300}
       y={100}
       spacing={32}
       padding={64}
@@ -463,8 +480,6 @@ function Category(
       </Text>
   );
 }
-
-
 
 function Skill(
   name: string,

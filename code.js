@@ -524,8 +524,19 @@
           showShadowBehindNode: false
         }
       ],
-      stroke: "#00000026",
+      stroke: "#DBDBDB",
       strokeWidth: 3
+    }, /* @__PURE__ */ figma.widget.h(AutoLayout, {
+      name: "leftPanel",
+      x: 0,
+      y: 0,
+      width: 1e3,
+      height: 1100,
+      stroke: "#DBDBDB",
+      strokeWidth: 3,
+      spacing: 32,
+      padding: 64,
+      direction: "vertical"
     }, /* @__PURE__ */ figma.widget.h(Text, {
       name: Status,
       key: Status,
@@ -542,9 +553,9 @@
       letterSpacing: 1.536,
       textCase: "upper",
       fontWeight: 700
-    }, Status), /* @__PURE__ */ figma.widget.h(Frame, {
+    }, Status)), /* @__PURE__ */ figma.widget.h(Frame, {
       name: "Dividers",
-      x: 82,
+      x: 1200,
       y: 228,
       width: Status == "Future" ? 6e3 : 6e3,
       height: 650
@@ -709,7 +720,7 @@
     })), /* @__PURE__ */ figma.widget.h(AutoLayout, {
       name: "Container",
       verticalAlignItems: "center",
-      x: 150,
+      x: 1300,
       y: 100,
       spacing: 32,
       padding: 64,
