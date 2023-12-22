@@ -22,18 +22,31 @@ export function Skill({
   const offsetA = 734 - ((voteMap.get(skillKey) || 1) * 130)
   const offsetB = 734 - ((voteFutureMap.get(skillKey) || 1) * 130)
 
-  const activeOpacity = 0.9
+  const currentOpacity = 0.9
+  const futureOpacity = 0.3
   const hoverOpacity = 0.4
   //const hideSkill = (status == "Current") || (status == "Future")
 
   const rectangles = [5, 4, 3, 2, 1].map((data) => {
     const currentPosition = data
     const { description } = levelDescriptions.find(obj => obj.skill === name && obj.level === currentPosition.toString())
+    //const opacity = voteFutureMap.get(skillKey) == currentPosition ? futureOpacity : voteMap.get(skillKey) == currentPosition ? currentOpacity : 0;
+
+    let opacity = 0;
+    if (voteFutureMap.get(skillKey) == currentPosition) {
+      opacity = futureOpacity;
+    } else if (voteMap.get(skillKey) == currentPosition) {
+      opacity = currentOpacity;
+    } 
+
+    if(voteFutureMap.get(skillKey) == currentPosition && voteMap.get(skillKey) == currentPosition){
+      opacity = currentOpacity;
+    }
 
     return <Rectangle
       name={`Skill-Block-${currentPosition}-${name}`}
       key={`Skill-Block-${currentPosition}-${skillKey}`}
-      opacity={voteFutureMap.get(skillKey) == currentPosition ? 0.3 : voteMap.get(skillKey) == currentPosition ? activeOpacity : 0}
+      opacity={opacity}
       y={{ type: "bottom", offset: 1 }}
       fill={color}
       cornerRadius={6}
