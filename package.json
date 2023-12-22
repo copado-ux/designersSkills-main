@@ -4,7 +4,8 @@
   "description": "Your Figma widget",
   "main": "code.js",
   "scripts": {
-    "build": "esbuild code.tsx --bundle --outfile=code.js"
+    "build": "esbuild ./src/index.js --bundle --outdir=out",
+    "build-watch": "npm run build -- --watch"
   },
   "author": "",
   "license": "",
@@ -12,6 +13,7 @@
     "@figma/plugin-typings": "^1.82.0",
     "@figma/widget-typings": "^1.4.0",
     "esbuild": "^0.14.43",
+    "prettier": "^3.1.1",
     "typescript": "*"
   }
 }
