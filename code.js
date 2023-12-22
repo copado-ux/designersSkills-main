@@ -449,10 +449,19 @@
   function Widget() {
     const voteMap = useSyncedMap("skill-level");
     const voteFutureMap = useSyncedMap("skill-future-level");
-    const [userLevel, setUserLevel] = useSyncedState("level", 1);
+    const [userLevel, setUserLevel] = useSyncedState("level", 0);
     const [showLevels, setShowLevels] = useSyncedState("isShown", false);
     const [Status, setStatus] = useSyncedState("status", "Current");
     const statusOptions = [{ option: "Current", label: "Current" }, { option: "Future", label: "Future" }];
+    const syncUserLevel = () => {
+      let total = 0;
+      console.log(voteMap.keys());
+      voteMap.values().forEach((value) => {
+        total += value;
+      });
+      const average = Math.round(total / voteMap.values().length);
+      setUserLevel(average);
+    };
     usePropertyMenu([
       {
         itemType: "dropdown",
@@ -569,9 +578,6 @@
       hidden: showLevels ? true : false,
       width: Status == "Future" ? 6e3 : 6e3,
       height: 131.5,
-      onClick: () => {
-        setUserLevel(1);
-      },
       hoverStyle: {
         opacity: showLevels ? 0.1 : 0.5
       }
@@ -596,9 +602,6 @@
       width: Status == "Future" ? 6e3 : 6e3,
       height: 130.5,
       hidden: showLevels ? true : false,
-      onClick: () => {
-        setUserLevel(2);
-      },
       hoverStyle: {
         opacity: showLevels ? 0.1 : 0.5
       }
@@ -623,9 +626,6 @@
       width: Status == "Future" ? 6e3 : 6e3,
       height: 130,
       hidden: showLevels ? true : false,
-      onClick: () => {
-        setUserLevel(3);
-      },
       hoverStyle: {
         opacity: showLevels ? 0.1 : 0.5
       }
@@ -650,9 +650,6 @@
       hidden: showLevels ? true : false,
       width: Status == "Future" ? 6e3 : 6e3,
       height: 130.5,
-      onClick: () => {
-        setUserLevel(4);
-      },
       hoverStyle: {
         opacity: showLevels ? 0.1 : 0.5
       }
@@ -676,9 +673,6 @@
       width: Status == "Future" ? 6e3 : 6e3,
       height: 130.5,
       hidden: showLevels ? true : false,
-      onClick: () => {
-        setUserLevel(5);
-      },
       hoverStyle: {
         opacity: showLevels ? 0.1 : 0.5
       }
@@ -732,7 +726,7 @@
       spacing: 30
     }, categories.map((category) => {
       return category.skills.map((skill, i) => {
-        return Skill(skill, category.name, category.color, category.skillDescriptions[i], `${category.name}-${skill}`, Status, showLevels, voteMap, voteFutureMap);
+        return Skill(skill, category.name, category.color, category.skillDescriptions[i], `${category.name}-${skill}`, Status, showLevels, voteMap, voteFutureMap, syncUserLevel);
       });
     })), /* @__PURE__ */ figma.widget.h(AutoLayout, {
       name: "Categories",
@@ -759,7 +753,7 @@
       fontWeight: 700
     }, name);
   }
-  function Skill(name, category, color, skill_description, skill_key, status, showLevels, voteMap, voteFutureMap) {
+  function Skill(name, category, color, skill_description, skill_key, status, showLevels, voteMap, voteFutureMap, onChange) {
     const offsetA = 734 - (voteMap.get(skill_key) || 1) * 130;
     const offsetB = 734 - (voteFutureMap.get(skill_key) || 1) * 130;
     const activeOpacity = 0.9;
@@ -795,6 +789,7 @@
       height: 650,
       onClick: () => {
         status == "Current" ? voteMap.set(skill_key, 5) : voteFutureMap.set(skill_key, 5);
+        onChange == null ? void 0 : onChange();
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "5" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -814,6 +809,7 @@
       height: 519,
       onClick: () => {
         status == "Current" ? voteMap.set(skill_key, 4) : voteFutureMap.set(skill_key, 4);
+        onChange == null ? void 0 : onChange();
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "4" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -833,6 +829,7 @@
       height: 389,
       onClick: () => {
         status == "Current" ? voteMap.set(skill_key, 3) : voteFutureMap.set(skill_key, 3);
+        onChange == null ? void 0 : onChange();
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "3" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -852,6 +849,7 @@
       height: 259,
       onClick: () => {
         status == "Current" ? voteMap.set(skill_key, 2) : voteFutureMap.set(skill_key, 2);
+        onChange == null ? void 0 : onChange();
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "2" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
@@ -871,6 +869,7 @@
       height: 130,
       onClick: () => {
         status == "Current" ? voteMap.set(skill_key, 1) : voteFutureMap.set(skill_key, 1);
+        onChange == null ? void 0 : onChange();
       },
       hoverStyle: { opacity: voteMap.get(skill_key) == "1" ? 1 : hoverOpacity },
       tooltip: levelDescriptions.find((obj) => {
