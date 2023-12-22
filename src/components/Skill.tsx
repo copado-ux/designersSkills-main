@@ -61,6 +61,19 @@ export function Skill({
       width={250}
       height={716}
     >
+    <Rectangle
+    name= { `Skill-Block-Bg-${name}` }
+    key= { `Skill-Block-Bg-${skillKey}` }
+    opacity={0.2}
+    y={{
+      type: "bottom",
+      offset: 1,
+    }}
+    fill={color}
+    cornerRadius={6}
+    width={250}
+    height={650}
+    />
       {rectangles}
 
       <Text
