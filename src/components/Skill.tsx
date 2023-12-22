@@ -1,5 +1,5 @@
 import type { Skill } from "../types";
-import { levelDescriptions } from "../../levelinfo";
+import { levelDescriptions } from "../data/levelInfo";
 
 const { widget } = figma;
 const {
