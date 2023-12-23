@@ -43,6 +43,9 @@ export function Skill({
       opacity = currentOpacity;
     }
 
+ 
+
+
     return <Rectangle
       name={`Skill-Block-${currentPosition}-${name}`}
       key={`Skill-Block-${currentPosition}-${skillKey}`}
@@ -56,7 +59,12 @@ export function Skill({
         if (status == "Current") {
           voteMap.set(skillKey, currentPosition)
         } else {
+          if(currentPosition< voteMap.get(skillKey)){
+          voteFutureMap.set(skillKey, voteMap.get(skillKey))
+        }else{
           voteFutureMap.set(skillKey, currentPosition)
+
+        }
         }
 
         onChange?.()
