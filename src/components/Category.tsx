@@ -9,7 +9,7 @@ export function Category({ name, color, categoryKey }: Category) {
       key={`Category-${categoryKey}`}
       //hidden = { hideCategory ? true : false }
       fill={color}
-      width={200}
+      width={250}
       height={50}
       verticalAlignText="center"
       horizontalAlignText="center"
