@@ -1,36 +1,54 @@
 import type { Category } from '../types'
 
-const strategyCategory = {
-  name: "Strategy",
+const researchCategory = {
+  name: "Research",
   color: "#357aba",
-  skills: ["Product", "Research", "Vision"],
-  skillDescriptions: ["What we're building and why", "Qualitative and quantitative evidence", "Future pathways and how things fit together"],
+  skills: ["Qualitative", "Quantitative", "User Needs Evaluation", "Analysis", "Domain Knowledge"],
+  skillDescriptions: ["1","2","3","4","5"],
+};
+const qualityAssessmentCategory = {
+  name: "Quality Assessment",
+  color: "#4faea0",
+  skills: ["Usability Evaluation", "Metrics and Measures"],
+  skillDescriptions: ["1","2"],
+};
+const systemsCategory = {
+  name: "Systems",
+  color: "#f7ce46",
+  skills: ["Information Architecture", "User Flows", "Holistic Design"],
+  skillDescriptions: ["1","2","3"],
 };
 const craftCategory = {
   name: "Craft",
-  color: "#4faea0",
-  skills: ["Visual", "Interaction", "Systems"],
-  skillDescriptions: ["How things look", "How things behave", "Underlying models, IAs, etc."],
-};
-const writingCraftCategory = {
-  name: "Writing",
-  color: "#f7ce46",
-  skills: ["Content", "Copywriting", "Systems\u200B", "Design"],
-  skillDescriptions: ["Figuring out what to write", "Finding the perfect words", "Building consistency and cohesion", "Developing your UX design chops"],
-};
-const collabCategory = {
-  name: "Collaboration",
   color: "#6610bd",
-  skills: ["Communication", "Process", "Mindset"],
-  skillDescriptions: ["Written, verbal, and interpersonal skills", "Resiliency and growth orientation", "Sharing work and incorporating feedback"],
+  skills: ["UI Design", "Interaction Design", "Prototyping", "Handoff", "Visual and Motion Design"],
+  skillDescriptions: ["1","2","3","4","5"],
 };
-const impactCategory = {
-  name: "Impact",
+const businessAndStrategyCategory = {
+  name: "Business And Strategy",
   color: "#db6046",
-  skills: ["Effectiveness", "Leadership", "Citizenship"],
-  skillDescriptions: ["Output, follow-through, and business impact", "Mentorship, ability to influence and drive change", "Improving our culture, hiring, and company practices"],
+  skills: ["Product Sense", "Vision"],
+  skillDescriptions: ["1","2"],
+};
+const peopleCategory = {
+  name: "People",
+  color: "#A7BF45",
+  skills: ["Workshop Facilitation", "Empathy", "Storytelling", "Stakeholders Mgmt", "Collaboration", "Mindset"],
+  skillDescriptions: ["1","2","3","4","5","6"],
+};
+const writingCategory = {
+  name: "Writing",
+  color: "#BF4587",
+  skills: ["Content", "Branding"],
+  skillDescriptions: ["1","2"],
+};
+const personalCategory = {
+  name: "Personal",
+  color: "#45BFB0",
+  skills: ["Process", "Developer Skills", "Product Management", "Time Management", "Boldness"],
+  skillDescriptions: ["1","2","3","4","5"],
 };
 
-const categories: Category[] = [strategyCategory, craftCategory, writingCraftCategory, collabCategory, impactCategory];
+const categories: Category[] = [researchCategory,qualityAssessmentCategory,systemsCategory,craftCategory,businessAndStrategyCategory,peopleCategory,writingCategory,personalCategory];
 
 export default categories

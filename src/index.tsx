@@ -2,7 +2,7 @@ import { Category } from './components/Category';
 import { Skill } from './components/Skill';
 
 import categories from './data/categories'
-import { line, divider } from './icons';
+import { line, divider, logo } from './icons';
 
 const { widget } = figma;
 const {
@@ -12,6 +12,7 @@ const {
   AutoLayout,
   Frame,
   Rectangle,
+  Input,
   Text,
   SVG,
 } = widget;
@@ -23,6 +24,9 @@ function Widget() {
   const [showLevels, setShowLevels] = useSyncedState<boolean>("isShown", false)
   const [status, setStatus] = useSyncedState<string>("status", "Current")
   const statusOptions = [{ option: "Current", label: "Current" }, { option: "Future", label: "Future" }]
+
+  const [text, setText] = useSyncedState("text", "Type Your Name");
+
 
   const syncUserLevel = () => {
     let total = 0;
@@ -65,9 +69,11 @@ function Widget() {
   return (
     <Frame
       name="Everything"
-      width={status == "Future" ? 6000 : 6000}
+      width={status == "Future" ? 10000 : 10000}
       height={1100}
-      fill="#FFFFFF"
+      fill={status == "Current" ? "#FFFFFF" : "#FCFCFC"}
+      stroke={status == "Current" ? "#DBDBDB" : "#4584BF"}
+      strokeWidth = {status == "Current" ? 3 : 8}
       cornerRadius={10}
       effect={[
         {
@@ -115,8 +121,7 @@ function Widget() {
             false,
         },
       ]}
-      stroke="#DBDBDB"
-      strokeWidth={3}
+
     >
 
       <AutoLayout
@@ -127,31 +132,154 @@ function Widget() {
         height={1100}
         stroke="#DBDBDB"
         strokeWidth={3}
-        spacing={32}
+        spacing={64}
         padding={64}
         direction='vertical'
+        horizontalAlignItems="center"
+
 
       >
-        <Text
+          <AutoLayout
+        name='text'
+        width={'fill-parent'}
+        height={'hug-contents'}
+        spacing={0}
+        padding={0}
+        direction='vertical'
+        horizontalAlignItems="center"
+
+
+      >  
+      
+       <Text
+      name={status}
+      key={status}
+      //hidden = { hideCategory ? true : false }
+      fill={"#A7A7A7"}
+      x={82}
+      y={50}
+      width={800}
+      height={50}
+      verticalAlignText="center"
+      horizontalAlignText="center"
+      lineHeight="150%"
+      fontFamily="Inter"
+      fontSize={36}
+      letterSpacing={1.536}
+      fontWeight={700}
+    >
+      Product Design Team
+    </Text>
+              <Text
+      name={status}
+      key={status}
+      //hidden = { hideCategory ? true : false }
+      fill={"#A7A7A7"}
+      x={82}
+      y={50}
+      width={800}
+      height={50}
+      verticalAlignText="center"
+      horizontalAlignText="center"
+      lineHeight="150%"
+      fontFamily="Inter"
+      fontSize={86}
+      letterSpacing={1.536}
+      textCase="upper"
+      fontWeight={700}
+    >
+      Skill Mapping
+    </Text>
+           <Text
           name={status}
           key={status}
           //hidden = { hideCategory ? true : false }
-          fill={"#A7A7A7"}
+          fill={status == "Current" ? "#4584BF" : "#7223C2"}
           x={82}
           y={50}
-          width={240}
+          width={800}
           height={50}
           verticalAlignText="center"
-          horizontalAlignText="left"
+          horizontalAlignText="center"
           lineHeight="150%"
           fontFamily="Inter"
-          fontSize={40}
+          fontSize={36}
           letterSpacing={1.536}
           textCase="upper"
           fontWeight={700}
         >
-          {status}
+          {status} Status
         </Text>
+     
+    </AutoLayout>
+        <Input
+          fill="#555"
+          fontSize={64}
+          verticalAlignText="center"
+          horizontalAlignText="center"
+          lineHeight="150%"
+          fontFamily="Inter"
+          letterSpacing={1.536}
+          textCase="upper"
+          fontWeight={700}
+          height="fill-parent"
+          inputBehavior="multiline"
+          inputFrameProps={{
+            effect: {
+              type: "drop-shadow",
+              color: { r: 0, g: 0, b: 0, a: 0 },
+              offset: { x: 0, y: 0 },
+              blur: 2,
+              spread: 2,
+            },
+            horizontalAlignItems: "center",
+            padding: 8,
+            verticalAlignItems: "center",
+          }}
+          onTextEditEnd={(e) => setText(e.characters)}
+          value={text}
+          width={'fill-parent'}
+        />
+    <AutoLayout
+        name='text'
+        width={'fill-parent'}
+        height={'hug-contents'}
+        spacing={16}
+        padding={0}
+        direction='vertical'
+        horizontalAlignItems="center"
+
+
+      >  
+   
+       <Text
+      name={status}
+      key={status}
+      //hidden = { hideCategory ? true : false }
+      fill={"#A7A7A7"}
+      x={82}
+      y={50}
+      width={800}
+      height={50}
+      verticalAlignText="center"
+      horizontalAlignText="center"
+      lineHeight="150%"
+      fontFamily="Inter"
+      fontSize={24}
+      letterSpacing={1.536}
+      fontWeight={700}
+    >Over the mouse on the labels to know more about it    </Text>
+      <Rectangle
+            name="logo"
+            width={800}
+            height={20}
+          />
+          <SVG
+            name="Logo"
+            src={logo}
+          />
+    </AutoLayout>
+     
       </AutoLayout>
 
       <Frame
@@ -330,6 +458,7 @@ function Widget() {
           src={line}
         />
       </Frame>
+      
       <AutoLayout
         name="Container"
         verticalAlignItems={"center"}
@@ -340,11 +469,14 @@ function Widget() {
         cornerRadius={8}
         direction='vertical'
       >
+
+        
         <AutoLayout
           name="Skills"
           overflow="visible"
           spacing={30}
         >
+          
           {categories.map((category) => {
             const { name: categoryName, color, skillDescriptions } = category
 
@@ -361,6 +493,7 @@ function Widget() {
               onChange: syncUserLevel
             }));
           })}
+          
         </AutoLayout>
         <AutoLayout
           name="Categories"

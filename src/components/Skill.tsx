@@ -29,7 +29,7 @@ export function Skill({
 
   const rectangles = [5, 4, 3, 2, 1].map((data) => {
     const currentPosition = data
-    const { description } = levelDescriptions.find(obj => obj.skill === name && obj.level === currentPosition.toString())
+    //const { description } = levelDescriptions.find(obj => obj.skill === name && obj.level === currentPosition.toString())
     //const opacity = voteFutureMap.get(skillKey) == currentPosition ? futureOpacity : voteMap.get(skillKey) == currentPosition ? currentOpacity : 0;
 
     let opacity = 0;
@@ -70,7 +70,7 @@ export function Skill({
         onChange?.()
       }}
       hoverStyle={{ opacity: voteMap.get(skillKey) == currentPosition ? 1 : hoverOpacity }}
-      tooltip={description}
+      //tooltip={description}
     />
   })
 
@@ -129,7 +129,7 @@ export function Skill({
         horizontalAlignText="center"
         lineHeight="150%"
         fontFamily="Inter"
-        fontSize={32}
+        fontSize={20}
         letterSpacing={-0.32}
         fontWeight={700}
         strokeWidth={1.391}
