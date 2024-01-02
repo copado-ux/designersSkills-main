@@ -1,7 +1,7 @@
 {
-  "name": "Skills-Chart",
+  "name": "UX Skills Map",
   "version": "1.0.0",
-  "description": "Your Figma widget",
+  "description": "Map the skills of the product design team's members",
   "main": "code.js",
   "scripts": {
     "build": "esbuild ./src/index.js --bundle --outdir=out",
