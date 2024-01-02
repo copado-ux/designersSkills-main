@@ -2,14 +2,16 @@ import { Category } from "../types";
 
 const { Text } = figma.widget
 
-export function Category({ name, color, categoryKey }: Category) {
+export function Category({ name, color, skills, categoryKey }: Category) {
+  console.log(skills);
+
   return (
     <Text
       name={`Category-${name}`}
       key={`Category-${categoryKey}`}
       //hidden = { hideCategory ? true : false }
       fill={color}
-      width={250}
+      width={250 * skills.length + (30 * (skills.length -1))}
       height={50}
       verticalAlignText="center"
       horizontalAlignText="center"
