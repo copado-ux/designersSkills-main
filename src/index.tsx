@@ -251,7 +251,18 @@ function Widget() {
 
 
       >  
-   
+   <Text
+   fill={"#A7A7A7"}
+   width={800}
+      height={50}
+      verticalAlignText="center"
+      horizontalAlignText="center"
+      lineHeight="150%"
+      fontFamily="Inter"
+      fontSize={24}
+      letterSpacing={1.536}
+      fontWeight={700}
+  >Instructions:</Text>
        <Text
       name={status}
       key={status}
@@ -267,8 +278,39 @@ function Widget() {
       fontFamily="Inter"
       fontSize={24}
       letterSpacing={1.536}
+      fontWeight={500}
+    >- Over on the skills label to show more info about it. - Click on each skill to evaluate your skill knowledge from 1 (novice) to 5 (expert). - Switch to Future status using the option menu, and proceed to do the same for each skill you would like to focus your improvement.  </Text>
+      <Text
+   fill={"#A7A7A7"}
+   width={800}
+      height={50}
+      verticalAlignText="center"
+      horizontalAlignText="center"
+      lineHeight="150%"
+      fontFamily="Inter"
+      fontSize={24}
+      letterSpacing={1.536}
       fontWeight={700}
-    >Over the mouse on the labels to know more about it    </Text>
+  >Levels:</Text>
+      <Text
+      name={status}
+      key={status}
+      //hidden = { hideCategory ? true : false }
+      fill={"#A7A7A7"}
+      x={82}
+      y={50}
+      width={800}
+      height={50}
+      verticalAlignText="center"
+      horizontalAlignText="center"
+      lineHeight="150%"
+      fontFamily="Inter"
+      fontSize={24}
+      letterSpacing={1.536}
+      fontWeight={500}
+    >NOVICE(1) - I've done that once. BEGINNER(2) - I need help, but I can do it on my own. COMPETENT(3) - I know what to do. PROFICIENT(4) - I proactively do that. EXPERT(5) - Ask me anything about that.
+    </Text>
+      
       <Rectangle
             name="logo"
             width={800}
@@ -286,7 +328,7 @@ function Widget() {
         name="Dividers"
         x={1200}
         y={228}
-        width={status == "Future" ? 6000 : 6000}
+        width={status == "Future" ? 10000 : 10000}
         height={650}
       >
         <Frame
@@ -297,7 +339,7 @@ function Widget() {
           strokeWidth={0}
           overflow="visible"
           hidden={showLevels ? true : false}
-          width={status == "Future" ? 6000 : 6000}
+          width={status == "Future" ? 10000 : 10000}
           height={131.5}
           hoverStyle={{
             opacity: showLevels ? 0.1 : 0.5,
@@ -313,7 +355,7 @@ function Widget() {
           <SVG
             name="Divider-L1-Line"
             height={3}
-            width={status == "Future" ? 6000 : 6000}
+            width={status == "Future" ? 10000 : 10000}
             opacity={userLevel == 1 ? 1 : 1}
             src={divider}
           />
@@ -324,7 +366,7 @@ function Widget() {
           y={390}
           strokeWidth={0}
           overflow="visible"
-          width={status == "Future" ? 6000 : 6000}
+          width={status == "Future" ? 10000 : 10000}
           height={130.5}
           hidden={showLevels ? true : false}
           hoverStyle={{
@@ -341,7 +383,7 @@ function Widget() {
           <SVG
             name="Divider-L2-Line"
             height={3}
-            width={status == "Future" ? 6000 : 6000}
+            width={status == "Future" ? 10000 : 10000}
             opacity={userLevel == 2 ? 1 : 1}
             src={divider}
           />
@@ -352,7 +394,7 @@ function Widget() {
           y={260.5}
           strokeWidth={0}
           overflow="visible"
-          width={status == "Future" ? 6000 : 6000}
+          width={status == "Future" ? 10000 : 10000}
           height={130}
           hidden={showLevels ? true : false}
           hoverStyle={{
@@ -369,7 +411,7 @@ function Widget() {
             name="Divider-L3-Line"
             y={0.5}
             height={3}
-            width={status == "Future" ? 6000 : 6000}
+            width={status == "Future" ? 10000 : 10000}
             opacity={userLevel == 3 ? 1 : 1}
             src={divider}
           />
@@ -381,7 +423,7 @@ function Widget() {
           strokeWidth={0}
           overflow="visible"
           hidden={showLevels ? true : false}
-          width={status == "Future" ? 6000 : 6000}
+          width={status == "Future" ? 10000 : 10000}
           height={130.5}
           hoverStyle={{
             opacity: showLevels ? 0.1 : 0.5,
@@ -397,7 +439,7 @@ function Widget() {
           <SVG
             name="Divider-L4-Line"
             height={3}
-            width={status == "Future" ? 6000 : 6000}
+            width={status == "Future" ? 10000 : 10000}
             opacity={userLevel == 4 ? 0 : 1}
             src={divider}
           />
@@ -407,7 +449,7 @@ function Widget() {
           opacity={0.1}
           strokeWidth={0}
           overflow="visible"
-          width={status == "Future" ? 6000 : 6000}
+          width={status == "Future" ? 10000 : 10000}
           height={130.5}
           hidden={showLevels ? true : false}
           hoverStyle={{
@@ -424,7 +466,7 @@ function Widget() {
           <SVG
             name="Divider-L5-Line"
             height={3}
-            width={status == "Future" ? 6000 : 6000}
+            width={status == "Future" ? 10000 : 10000}
             opacity={userLevel == 5 ? 1 : 1}
             src={divider}
           />
@@ -443,7 +485,7 @@ function Widget() {
           letterSpacing={1.456}
           fontWeight={700}
         >
-          Skill LEVEL ({userLevel})
+          SKILL LEVEL ({userLevel})
 
         </Text>
         <SVG
@@ -454,7 +496,7 @@ function Widget() {
           }}
           hidden={showLevels ? true : false}
           height={3}
-          width={status == "Future" ? 6000 : 6000}
+          width={status == "Future" ? 10000 : 10000}
           src={line}
         />
       </Frame>

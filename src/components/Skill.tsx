@@ -29,7 +29,7 @@ export function Skill({
 
   const rectangles = [5, 4, 3, 2, 1].map((data) => {
     const currentPosition = data
-    //const { description } = levelDescriptions.find(obj => obj.skill === name && obj.level === currentPosition.toString())
+    const { description } = levelDescriptions.find(obj => obj.skill === name && obj.level === currentPosition.toString())
     //const opacity = voteFutureMap.get(skillKey) == currentPosition ? futureOpacity : voteMap.get(skillKey) == currentPosition ? currentOpacity : 0;
 
     let opacity = 0;
